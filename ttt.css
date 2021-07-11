@@ -1,0 +1,11 @@
+.board{
+    display: grid;
+    grid-template-columns: 100px 100px 100px;
+    grid-template-rows: 100px 100px 100px;
+    grid-gap: 5px;
+}
+
+.cell {
+    border: 2px solid black;
+    font-size: 50px;;
+}
