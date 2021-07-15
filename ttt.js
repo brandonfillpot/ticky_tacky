@@ -4,6 +4,7 @@ const currentPlayer = [x_mark, o_mark]
 const boardCell = document.querySelectorAll('[data-cell-index]')
 let movesMade_X = ['','','','','','','','','']
 let circleTurn = false;
+let statusDisplay = document.getElementById('status')
 const chickenDinner = [
     [0,1,2],
     [3,4,5],
@@ -27,30 +28,81 @@ function handleClick(event){
         clickedCellIndex = cell.getAttribute('data-cell-index')
         clickedCellIndexNum = parseInt(clickedCellIndex)
         movesMade_X[clickedCellIndexNum] = currentTurn
-        // console.log(movesMade_X)
-        // console.log(event.target.innerHTML)
-        // console.log(cell)
-        // console.log(typeof clickedCellIndexNum)
+
+        
         checkWinner()   
         changeTurn()
     }
 }
 
 function checkWinner(){
-    for (i = 0; i < 2; i++){
+    const winningPlayer = circleTurn ? o_mark : x_mark
+    for (i = 0; i < 1; i++){
         const winnerWinner = chickenDinner[i]
         if (movesMade_X[0] === movesMade_X[1] && movesMade_X[1] === movesMade_X[2]){
-            console.log('win please')
-            if(movesMade_X[0] !== '' && movesMade_X[1] !== '' && movesMade_X[2] !== ''){
             
-            console.log('winner')
+            if(movesMade_X[0] !== '' && movesMade_X[1] !== '' && movesMade_X[2] !== ''){
+            statusDisplay.innerHTML = winningPlayer + ' is the winner'
+            
             }
         } 
+        if (movesMade_X[3] === movesMade_X[4] && movesMade_X[4] === movesMade_X[5]){
+            
+            if(movesMade_X[3] !== '' && movesMade_X[4] !== '' && movesMade_X[5] !== ''){
+            statusDisplay.innerHTML = winningPlayer + ' is the winner'
+            
+            }
+        } 
+        if (movesMade_X[6] === movesMade_X[7] && movesMade_X[7] === movesMade_X[8]){
+            
+            if(movesMade_X[6] !== '' && movesMade_X[7] !== '' && movesMade_X[8] !== ''){
+            statusDisplay.innerHTML = winningPlayer + ' is the winner'
+            
+            }
+        } 
+        if (movesMade_X[0] === movesMade_X[3] && movesMade_X[3] === movesMade_X[6]){
+            
+            if(movesMade_X[0] !== '' && movesMade_X[3] !== '' && movesMade_X[6] !== ''){
+            statusDisplay.innerHTML = winningPlayer + ' is the winner'
+            
+            }
+        }
+        if (movesMade_X[1] === movesMade_X[4] && movesMade_X[4] === movesMade_X[7]){
+            
+            if(movesMade_X[1] !== '' && movesMade_X[4] !== '' && movesMade_X[7] !== ''){
+            statusDisplay.innerHTML = winningPlayer + ' is the winner'
+            
+            }
+        }
+        if (movesMade_X[2] === movesMade_X[5] && movesMade_X[5] === movesMade_X[8]){
+            
+            if(movesMade_X[2] !== '' && movesMade_X[5] !== '' && movesMade_X[8] !== ''){
+            statusDisplay.innerHTML = winningPlayer + ' is the winner'
+            
+            }
+        }
+        if (movesMade_X[0] === movesMade_X[4] && movesMade_X[4] === movesMade_X[8]){
+            
+            if(movesMade_X[0] !== '' && movesMade_X[4] !== '' && movesMade_X[8] !== ''){
+            statusDisplay.innerHTML = winningPlayer + ' is the winner'
+            
+            }
+        }
+        if (movesMade_X[2] === movesMade_X[4] && movesMade_X[4] === movesMade_X[6]){
+            
+            if(movesMade_X[2] !== '' && movesMade_X[4] !== '' && movesMade_X[6] !== ''){
+            statusDisplay.innerHTML = winningPlayer + ' is the winner'
+            
+            }
+        }     
     }
 }
 
 function reset() {
     boardCell.forEach(cell => cell.innerHTML = '')
+    statusDisplay.innerHTML = ''
+    movesMade_X = ['','','','','','','','','']
+    circleTurn = false
 };
 
 function changeTurn(){
