@@ -3,7 +3,7 @@ const o_mark = "O"
 let currentPlayer = ['', '']
 const boardCell = document.querySelectorAll('[data-cell-index]')
 let movesMade_X = ['','','','','','','','','']
-let circleTurn = false;
+let circleTurn = true;
 // const whoseTurn = circleTurn ? o_mark : x_mark
 // console.log(whoseTurn)
 let statusDisplay = document.getElementById('status')
@@ -12,12 +12,12 @@ let playerTurnElem = document.getElementById('playerTurn')
 function renderPlayer(whoseTurn){
     // let text;
     if(whoseTurn){
-        let text = "It is X's turn."
+        let text = "It is O's turn."
         playerTurnElem.innerHTML = text;
         console.log('should be true:', whoseTurn)
         return 
     } else {
-        let text = "It is O's turn"
+        let text = "It is X's turn"
         playerTurnElem.innerHTML = text;
         console.log('should be false:', whoseTurn)
         return
@@ -41,7 +41,7 @@ function handleClick(event){
         clickedCellIndex = cell.getAttribute('data-cell-index')
         clickedCellIndexNum = parseInt(clickedCellIndex)
         movesMade_X[clickedCellIndexNum] = currentTurn
-
+        computerMove()
         checkWinner()   
         changeTurn()
     }
@@ -114,9 +114,39 @@ function reset() {
     statusDisplay.innerHTML = ''
     movesMade_X = ['','','','','','','','','']
     circleTurn = false
+    document.getElementById('playerTurn').innerHTML = `<input type="text" id="player1" placeholder="Player 1">
+    <input type="text" id="player2" placeholder="Player 2">
+    <button class="start">Sumbit</button>`
+    document.getElementById('playerOneName').innerHTML = ''
+    document.getElementById('playerTwoName').innerHTML = ''
 };
 
 function changeTurn(){
     circleTurn = !circleTurn
     renderPlayer(circleTurn)
+}
+
+playerTurnElem.addEventListener('click', function(event){
+    if (event.target.className !== 'start') return
+
+    const playerOneInput = document.getElementById('player1').value
+    const playerTwoInput = document.getElementById('player2')
+
+    if (playerTwoInput.value === ''){
+        document.getElementById('playerOneName').innerHTML = playerOneInput + ' is X '
+        playerTwoName.innerHTML = 'Computer is O'
+    } else{
+        document.getElementById('playerOneName').innerHTML = playerOneInput + ' is X '
+        document.getElementById('playerTwoName').innerHTML = playerTwoInput.value + ' is O'
+    }
+    changeTurn()
+})
+// playerTurnElem.innerHTML === "It is X's turn"
+function computerMove (){
+    if (playerTurnElem.innerHTML === "It is X's turn" && playerTwoName.innerHTML === 'Computer is O'){
+        console.log(playerTurnElem.innerHTML)
+        for (i = 0; i < 9; i++){
+            console.log(i)
+        }
+    }
 }
