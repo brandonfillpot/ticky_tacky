@@ -1,25 +1,38 @@
 const x_mark = "X"
 const o_mark = "O"
-const currentPlayer = [x_mark, o_mark]
+let currentPlayer = ['', '']
 const boardCell = document.querySelectorAll('[data-cell-index]')
 let movesMade_X = ['','','','','','','','','']
 let circleTurn = false;
+// const whoseTurn = circleTurn ? o_mark : x_mark
+// console.log(whoseTurn)
 let statusDisplay = document.getElementById('status')
-const chickenDinner = [
-    [0,1,2],
-    [3,4,5],
-    [6,7,8],
-    [0,3,6],
-    [1,4,7],
-    [2,5,8],
-    [0,4,8],
-    [2,4,6]
-]
+let playerTurnElem = document.getElementById('playerTurn')
+
+function renderPlayer(whoseTurn){
+    // let text;
+    if(whoseTurn){
+        let text = "It is X's turn."
+        playerTurnElem.innerHTML = text;
+        console.log('should be true:', whoseTurn)
+        return 
+    } else {
+        let text = "It is O's turn"
+        playerTurnElem.innerHTML = text;
+        console.log('should be false:', whoseTurn)
+        return
+    }
+}
 
 boardCell.forEach(cell => {
     cell.addEventListener('click', handleClick)
+    
 })
 
+// boardCell.forEach(cell => {
+//     cell.addEventListener('click', renderPlayer)
+    
+// })
 function handleClick(event){
     const cell = event.target
     if (cell.innerHTML === ''){
@@ -29,7 +42,6 @@ function handleClick(event){
         clickedCellIndexNum = parseInt(clickedCellIndex)
         movesMade_X[clickedCellIndexNum] = currentTurn
 
-        
         checkWinner()   
         changeTurn()
     }
@@ -38,7 +50,6 @@ function handleClick(event){
 function checkWinner(){
     const winningPlayer = circleTurn ? o_mark : x_mark
     for (i = 0; i < 1; i++){
-        const winnerWinner = chickenDinner[i]
         if (movesMade_X[0] === movesMade_X[1] && movesMade_X[1] === movesMade_X[2]){
             
             if(movesMade_X[0] !== '' && movesMade_X[1] !== '' && movesMade_X[2] !== ''){
@@ -107,4 +118,5 @@ function reset() {
 
 function changeTurn(){
     circleTurn = !circleTurn
+    renderPlayer(circleTurn)
 }
